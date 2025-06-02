@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pizza and Nihilism</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      background: url('kendrick.jpg') no-repeat center center;
+      background-size: cover;
+      color: #f0f0f0;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .overlay {
+      background-color: rgba(18, 18, 18, 0.75);
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      max-width: 600px;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      background-color: transparent;
+      color: #f5d7a1;
+      border: 1px solid #f5d7a1;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: rgba(245, 215, 161, 0.1);
+      box-shadow: 0 0 5px #f5d7a1;
+    }
+
+    #noBtn.clicked {
+      color: #e0b687;
+      border-color: #e0b687;
+    }
+
+    .quote {
+      font-size: 0.95rem;
+      margin-top: 2rem;
+      color: #c0b7d1;
+      font-style: italic;
+    }
+
+    .playing {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #a7a0b7;
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .nanami {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 150px;
+      opacity: 0.9;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Do you want to get pizza with me?</h1>
+    <h3>Press any button to hear a song</h3>
+
+    <div>
+      <button class="btn" id="yesBtn">Yes.</button>
+      <button class="btn" id="noBtn">No.</button>
+    </div>
+
+    <p class="quote">“The desire for pizza is the beginning of wisdom.” — not Aristotle</p>
+    <p class="playing">Now playing: “LOVE.” — Kendrick Lamar</p>
+
+    <footer>
+      <p><em>Philosophy says acceptance. Pizza says comfort.</em></p>
+    </footer>
+  </div>
+
+  <audio id="bgMusic" src="Kendrick-love.mp3" preload="auto" loop></audio>
+
+  
+
+  <script>
+    const music = document.getElementById("bgMusic");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    let noClicked = false;
+    let musicStarted = false;
+
+    function startMusic() {
+      if (!musicStarted) {
+        music.play().catch(() => {
+          // Ignore play promise rejection, user interaction required
+        });
+        musicStarted = true;
+      }
+    }
+
+    yesBtn.addEventListener("click", () => {
+      startMusic();
+      alert("Cool. I'll act like I wasn't nervous to ask.");
+    });
+
+    noBtn.addEventListener("click", () => {
+      startMusic();
+      if (!noClicked) {
+        noBtn.innerText = "Yes, no?";
+        noBtn.classList.add("clicked");
+        noClicked = true;
+      } else {
+        noBtn.innerText = "You hesitated.";
+        noBtn.disabled = true;
+      }
+    });
+
+    console.log("You overthink things. Just say yes to the pizza.");
+  </script>
+</body>
+</html>
+
